@@ -34,7 +34,7 @@ class GroupOverallProgress:
          'anonfirstname21 anonlastname21']
 
         test_user = self.user
-        print(test_user)
+        #print(test_user)
 
         default_user = str(63)
         #print(default_user)

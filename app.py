@@ -76,18 +76,18 @@ def post_planning():
 @app.server.route('/api/group/assessment')
 def get_assessment():
     user = session.get('user')
-    instance_of_assessment = GroupAssessment(app=app, user=user)
+    instance_of_assessment = GroupAssessment(app=server, user=user)
     return instance_of_assessment.operation()
 
 @app.server.route('/api/group/overall_progress')
 def get_overall_progress():
     user = session.get('user')
-    instance_of_overall_progress = GroupOverallProgress(app=app, user=user)
+    instance_of_overall_progress = GroupOverallProgress(app=server, user=user)
     return instance_of_overall_progress.operation()
 
 @app.server.route('/api/group/planning')
 def get_planning():
     user = session.get('user')
-    instance_of_overall_progress = GroupPlanning(app=app, user=user)
+    instance_of_overall_progress = GroupPlanning(app=server, user=user)
     return instance_of_overall_progress.operation()
 
