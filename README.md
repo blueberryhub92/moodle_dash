@@ -16,6 +16,8 @@ Get the App running:
   - pip install -r requirements.txt
 - Start the App with the command:
   - python index.py
+- Dash should be running on:
+  - http://127.0.0.1:8050/
 - Log in with the credentials:
   - username: anon1
   - password: restored
