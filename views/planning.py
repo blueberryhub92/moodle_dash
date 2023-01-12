@@ -18,8 +18,7 @@ layout = html.Div([
 
 @app.server.route('/api/group/planning')
 def get_planning():
-    user = session.get('user')
-    instance_of_overall_progress = GroupPlanning(app=server, user=user)
+    instance_of_overall_progress = GroupPlanning(app=server)
     return instance_of_overall_progress.operation()
 
 @app.callback(

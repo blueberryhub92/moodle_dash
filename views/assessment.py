@@ -18,8 +18,7 @@ layout = html.Div([
 
 @app.server.route('/api/group/assessment')
 def get_assessment():
-    user = session.get('user')
-    instance_of_assessment = GroupAssessment(app=server, user=user)
+    instance_of_assessment = GroupAssessment(app=server)
     return instance_of_assessment.operation()
 
 @app.callback(

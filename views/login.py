@@ -4,15 +4,10 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 
-from app import app, User, server
+from app import app, User
 from flask_login import login_user
 from werkzeug.security import check_password_hash
-import requests
-from flask import redirect, request, jsonify, session, make_response
-
-from group_assessment.assessment import GroupAssessment
-from group_overall_progress.overall_progress import GroupOverallProgress
-from group_planning.planning import GroupPlanning
+import configparser
 
 #  list of all the enrolled users
 eu = ['anonfirstname31 anonlastname31', 'anonfirstname62 anonlastname62', 'anonfirstname65 anonlastname65',
@@ -88,12 +83,10 @@ def sucess(n_clicks, usernameSubmit, passwordSubmit, username, password):
         if username in enrolled_usernames:
             if user.password == password:
                 login_user(user)
-                with open("current_user/example.txt", "w") as file:
-                    file.write(username)
-                # requests.post('http://localhost:8050/process_key', data={'username': username})
-                requests.post('http://localhost:8050/process_assessment', data={'username': username})
-                requests.post('http://localhost:8050/process_overall_progress', data={'username': username})
-                requests.post('http://localhost:8050/process_planning', data={'username': username})
+                config = configparser.ConfigParser()
+                config['SESSION'] = {'username': username}
+                with open('current_user/config.ini', 'w') as configfile:
+                    config.write(configfile)
                 return '/home'
             else:
                 pass

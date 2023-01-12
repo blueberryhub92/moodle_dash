@@ -1,17 +1,18 @@
+from flask import session
 from do_not_modify.sql_handler import SQLHandlerFacade
 import json
 import pandas as pd
 import math
 import re
+import configparser
 
 # enrolled users(localy)
 # df_users = pd.read_excel(io=r"C:\Users\admin\Downloads\Py_DS_ML_Bootcamp-master\enrolledusers.xlsx")
 # enrolled_users = list(df_users['User full name'].unique())
 # enrolled_users.remove('anonfirstname12 anonlastname12')"""
 class GroupOverallProgress:
-    def __init__(self, app, user):
+    def __init__(self, app):
         self.app = app
-        self.user = user
 
     def operation(self):
 
@@ -33,15 +34,13 @@ class GroupOverallProgress:
          'anonfirstname61 anonlastname61', 'anonfirstname69 anonlastname69', 'anonfirstname58 anonlastname58',
          'anonfirstname52 anonlastname52', 'anonfirstname71 anonlastname71', 'anonfirstname72 anonlastname72',
          'anonfirstname21 anonlastname21']
+        
+        config = configparser.ConfigParser()
+        config.read('current_user/config.ini')
+        session_username = config['SESSION']['username']
+        session['username'] = session_username
 
-        with open("current_user/example.txt", "r") as file:
-            contents = file.read()
-            print(contents)
-
-        my_string = re.sub(r'[a-z]', '', contents)
-
-        #test_user = self.user
-        #print(test_user)
+        my_string = re.sub(r'[a-z]', '', session['username'])
 
         default_user = my_string
         #print(default_user)

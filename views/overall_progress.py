@@ -20,8 +20,7 @@ layout = html.Div([
 
 @app.server.route('/api/group/overall_progress')
 def get_overall_progress():
-    user = session.get('user')
-    instance_of_overall_progress = GroupOverallProgress(app=server, user=user)
+    instance_of_overall_progress = GroupOverallProgress(app=server)
     return instance_of_overall_progress.operation()
 
 @app.callback(

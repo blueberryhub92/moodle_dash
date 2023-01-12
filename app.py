@@ -1,19 +1,13 @@
 # Dash app initialization
-from random import random
 import dash
 # User management initialization
 import os
-from flask_login import LoginManager, UserMixin, login_required
+from flask_login import LoginManager, UserMixin
 from users_mgt import db, mdl_user as base
 from config import URI
-from flask import Flask, jsonify, make_response,redirect, render_template, session, request
-import dash_bootstrap_components as dbc
-import json
+from flask import Flask
 from flask_session import Session
 from flask_cors import CORS
-from flask_login import login_required, current_user
-import requests
-
 
 server = Flask(__name__)
 server.config["SECRET_KEY"] = "topSecret"
@@ -38,7 +32,6 @@ db.init_app(server)
 
 server.app_context().push()
 
-
 # Setup the LoginManager for the server
 login_manager = LoginManager(server)
 login_manager.init_app(server)
@@ -53,23 +46,4 @@ class User(UserMixin, base):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-@app.server.route('/process_assessment', methods=['POST'])
-def post_assessment():
-    user = request.form['username']
-    session['user'] = user
-    return redirect('/api/group/assessment')
-
-@app.server.route('/process_overall_progress', methods=['POST'])
-def post_overall_progress():
-    user = request.form['username']
-    session['user'] = user
-    return redirect('/api/group/overall_progress')
-
-@app.server.route('/process_planning', methods=['POST'])
-def post_planning():
-    user = request.form['username']
-    session['user'] = user
-    return redirect('/api/group/planning')
-
 
