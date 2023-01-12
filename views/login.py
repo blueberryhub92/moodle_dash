@@ -14,6 +14,21 @@ from group_assessment.assessment import GroupAssessment
 from group_overall_progress.overall_progress import GroupOverallProgress
 from group_planning.planning import GroupPlanning
 
+#  list of all the enrolled users
+eu = ['anonfirstname31 anonlastname31', 'anonfirstname62 anonlastname62', 'anonfirstname65 anonlastname65',
+    'anonfirstname51 anonlastname51', 'anonfirstname66 anonlastname66', 'anonfirstname47 anonlastname47',
+    'anonfirstname48 anonlastname48', 'anonfirstname68 anonlastname68', 'anonfirstname59 anonlastname59',
+    'anonfirstname64 anonlastname64', 'anonfirstname67 anonlastname67', 'anonfirstname53 anonlastname53',
+    'anonfirstname49 anonlastname49', 'anonfirstname55 anonlastname55', 'anonfirstname73 anonlastname73',
+    'anonfirstname60 anonlastname60', 'anonfirstname57 anonlastname57', 'anonfirstname70 anonlastname70',
+    'anonfirstname63 anonlastname63', 'anonfirstname54 anonlastname54', 'anonfirstname56 anonlastname56',
+    'anonfirstname61 anonlastname61', 'anonfirstname69 anonlastname69', 'anonfirstname58 anonlastname58',
+    'anonfirstname52 anonlastname52', 'anonfirstname71 anonlastname71', 'anonfirstname72 anonlastname72',
+    'anonfirstname21 anonlastname21']
+
+enrolled_usernames = [i.replace('firstname', "").replace('lastname', "") for i in eu]
+enrolled_usernames = [i.split(" ", 1)[0] for i in enrolled_usernames]
+
 layout = dbc.Container([
     html.Br(),
     dbc.Container([
@@ -68,21 +83,22 @@ layout = dbc.Container([
               [State('usernameBox', 'value'),
                State('passwordBox', 'value')])
 def sucess(n_clicks, usernameSubmit, passwordSubmit, username, password):
-    user = User.query.filter_by(username=username).first()   
+    user = User.query.filter_by(username=username).first()
     if user:
-        if user.password == password:
-            login_user(user)
-            with open("current_user/example.txt", "w") as file:
-                file.write(username)
-            # requests.post('http://localhost:8050/process_key', data={'username': username})
-            requests.post('http://localhost:8050/process_assessment', data={'username': username})
-            requests.post('http://localhost:8050/process_overall_progress', data={'username': username})
-            requests.post('http://localhost:8050/process_planning', data={'username': username})
-            return '/home'
+        if username in enrolled_usernames:
+            if user.password == password:
+                login_user(user)
+                with open("current_user/example.txt", "w") as file:
+                    file.write(username)
+                # requests.post('http://localhost:8050/process_key', data={'username': username})
+                requests.post('http://localhost:8050/process_assessment', data={'username': username})
+                requests.post('http://localhost:8050/process_overall_progress', data={'username': username})
+                requests.post('http://localhost:8050/process_planning', data={'username': username})
+                return '/home'
+            else:
+                pass
         else:
             pass
-    else:
-        pass
 
 
 
