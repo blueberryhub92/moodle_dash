@@ -68,11 +68,13 @@ layout = dbc.Container([
               [State('usernameBox', 'value'),
                State('passwordBox', 'value')])
 def sucess(n_clicks, usernameSubmit, passwordSubmit, username, password):
-    user = User.query.filter_by(username=username).first()
-    
+    user = User.query.filter_by(username=username).first()   
     if user:
         if user.password == password:
             login_user(user)
+            with open("current_user/example.txt", "w") as file:
+                file.write(username)
+            # requests.post('http://localhost:8050/process_key', data={'username': username})
             requests.post('http://localhost:8050/process_assessment', data={'username': username})
             requests.post('http://localhost:8050/process_overall_progress', data={'username': username})
             requests.post('http://localhost:8050/process_planning', data={'username': username})

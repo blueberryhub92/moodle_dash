@@ -2,6 +2,7 @@ from do_not_modify.sql_handler import SQLHandlerFacade
 import json
 import pandas as pd
 import math
+import re
 
 # enrolled users(localy)
 # df_users = pd.read_excel(io=r"C:\Users\admin\Downloads\Py_DS_ML_Bootcamp-master\enrolledusers.xlsx")
@@ -33,10 +34,16 @@ class GroupOverallProgress:
          'anonfirstname52 anonlastname52', 'anonfirstname71 anonlastname71', 'anonfirstname72 anonlastname72',
          'anonfirstname21 anonlastname21']
 
-        test_user = self.user
+        with open("current_user/example.txt", "r") as file:
+            contents = file.read()
+            print(contents)
+
+        my_string = re.sub(r'[a-z]', '', contents)
+
+        #test_user = self.user
         #print(test_user)
 
-        default_user = str(63)
+        default_user = my_string
         #print(default_user)
 
         # user quisez

@@ -1,11 +1,12 @@
 # Dash app initialization
+from random import random
 import dash
 # User management initialization
 import os
 from flask_login import LoginManager, UserMixin, login_required
 from users_mgt import db, mdl_user as base
 from config import URI
-from flask import Flask, jsonify,redirect, render_template, session, request
+from flask import Flask, jsonify, make_response,redirect, render_template, session, request
 import dash_bootstrap_components as dbc
 import json
 from flask_session import Session
