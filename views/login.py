@@ -69,12 +69,13 @@ layout = dbc.Container([
                State('passwordBox', 'value')])
 def sucess(n_clicks, usernameSubmit, passwordSubmit, username, password):
     user = User.query.filter_by(username=username).first()
-    requests.post('http://localhost:8050/process_assessment', data={'username': username})
-    requests.post('http://localhost:8050/process_overall_progress', data={'username': username})
-    requests.post('http://localhost:8050/process_planning', data={'username': username})
+    
     if user:
         if user.password == password:
             login_user(user)
+            requests.post('http://localhost:8050/process_assessment', data={'username': username})
+            requests.post('http://localhost:8050/process_overall_progress', data={'username': username})
+            requests.post('http://localhost:8050/process_planning', data={'username': username})
             return '/home'
         else:
             pass

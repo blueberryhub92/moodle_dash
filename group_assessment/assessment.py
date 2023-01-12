@@ -8,6 +8,7 @@ class GroupAssessment:
         self.user = user
 
     def operation(self):
+        #print(self.user)
         handler = SQLHandlerFacade(app=self.app, query="SELECT * FROM mdl_quiz_grades")
         operation_result, pd_dataframe = handler.operation()
         print(handler)

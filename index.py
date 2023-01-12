@@ -1,5 +1,6 @@
 # index page
 import json
+from pathlib import Path
 import requests
 from dash import dcc
 from dash import html
@@ -64,16 +65,6 @@ def displayPage(pathname):
 
     if pathname == '/overall_progress':
         if current_user.is_authenticated:
-            # response = requests.get('http://127.0.0.1:8050/api/group/overall_progress')
-            # data = response.json()
-            # return html.Div([
-            #     html.H1(f'Data from Flask: {data}'),
-            #     overall_progress.layout
-            # ])
-            response = server.test_client().get('/api/group/overall_progress')
-            json_data = json.loads(response.data.decode())
-            with open('data.txt', 'w') as file:
-                file.write(json.dumps(json_data))
             return overall_progress.layout
         else:
             return login.layout

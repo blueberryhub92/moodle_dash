@@ -1,5 +1,5 @@
 
-from app import app
+from app import app, server
 
 import dash
 import requests
@@ -9,9 +9,11 @@ import plotly.graph_objects as go
 import pandas as pd
 from pandas.io.json import json_normalize
 import json
-
+from flask import session
 from flask_login import current_user
-
+from group_assessment.assessment import GroupAssessment
+from group_overall_progress.overall_progress import GroupOverallProgress
+from group_planning.planning import GroupPlanning
 
 dash.register_page(__name__,
                    path='/overall_progress',
