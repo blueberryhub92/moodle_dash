@@ -18,6 +18,6 @@ Get the App running:
   - python index.py
 - Dash should be running on:
   - http://127.0.0.1:8050/
-- Log in with the credentials:
-  - username: anon1
+- Log in with the credentials of an enrolled user, e.g.:
+  - username: anon63
   - password: restored
